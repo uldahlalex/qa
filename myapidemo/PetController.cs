@@ -9,22 +9,19 @@ public class Pet
 
 [ApiController]
 [ResponseCache(NoStore = true, Duration = 0)]
-public class PetController(MyFakeDb db) : ControllerBase
+public class PetController(PetService service) : ControllerBase
 {
 
     [HttpGet(nameof(GetAllPets))] 
-    public List<Pet> GetAllPets() => db.MyPets;
+    public List<Pet> GetAllPets() => service.MyPets;
 
     
 
     [HttpPost]
     [Route(nameof(CreatePet))]
-    public ActionResult<Pet> CreatePet([FromBody]Pet pet)
+    public Pet CreatePet([FromBody]Pet pet)
     {
-        if (pet.PetName.Length < 2)
-            return BadRequest("That was a bad request due to pet name length");
-        
-        return pet;
+        return service.CreatePet(pet);
     }
 
     [HttpPut]

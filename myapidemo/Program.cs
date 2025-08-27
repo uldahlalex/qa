@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddOpenApiDocument();
 builder.Services.AddControllers();
-builder.Services.AddSingleton<MyFakeDb>();
+builder.Services.AddSingleton<PetService>();
 builder.Services.AddCors();
 
 var app = builder.Build();
